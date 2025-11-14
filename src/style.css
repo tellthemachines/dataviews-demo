@@ -1,0 +1,42 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    color: #1a1a1a;
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont,"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,"Helvetica Neue", sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    height: 100%;
+
+   >  div {
+        height: 100%;
+    }
+}
+
+.font-styling-class {
+  font-family: "Nunito", "Comic Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.font-styling-class * {
+    font-family: "Nunito", "Comic Neue", -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+header {
+    padding: 1rem 48px 1rem;
+}
+
+.dataviews-wrapper {
+    height: calc(100% - 118px); /* adjust for header height */
+}
