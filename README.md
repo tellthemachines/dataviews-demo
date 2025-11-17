@@ -20,7 +20,7 @@ A minimal React application demonstrating the WordPress DataViews component for 
 ```
 src/
 ├── App.jsx                 # Main application component
-├── DataViewsComponent.jsx   # DataViews implementation
+├── DataViewsWrapper.jsx   # DataViews implementation
 ├── data.jsx                # Sample data and field definitions
 └── main.jsx                # Application entry point
 ```
@@ -106,7 +106,7 @@ To customize the display or behavior:
 
 1. Create your `src/data.js` file with the structure described above
 2. Update field configurations in `src/fields.jsx` to change display, sorting, or filtering behavior
-3. Modify the actions in `DataViewsComponent.jsx` to add custom functionality
+3. Modify the actions in `DataViewsWrapper.jsx` to add custom functionality
 
 ## License
 

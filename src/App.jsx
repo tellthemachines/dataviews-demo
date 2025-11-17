@@ -1,10 +1,10 @@
 import React from 'react'
-import DataViewsComponent from './DataViewsComponent.jsx'
+import DataViewsWrapper from './DataViewsWrapper.jsx'
 
 function App() {
   return (
 
-      <DataViewsComponent />
+      <DataViewsWrapper />
 
   )
 }

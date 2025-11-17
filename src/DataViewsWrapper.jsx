@@ -4,7 +4,7 @@ import { Button, Modal } from '@wordpress/components';
 import { sampleData } from './data.js';
 import { fields } from './fields.jsx';
 
-function DataViewsComponent() {
+function DataViewsWrapper() {
   const [isGroupedView, setIsGroupedView] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -250,4 +250,4 @@ function DataViewsComponent() {
   );
 }
 
-export default DataViewsComponent;
+export default DataViewsWrapper;
