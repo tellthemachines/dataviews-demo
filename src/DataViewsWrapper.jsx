@@ -27,9 +27,11 @@ function DataViewsWrapper() {
     infiniteScrollEnabled: false
   });
 
-  const [selection, setSelection] = useState([]);
-
-  // Filter and sort the data based on the current view
+  /* ============================================
+   * FILTER & SORT
+   * Apply filtering, search, and sorting rules
+   * based on the current `view` settings
+   * ============================================ */
   const data = useMemo(() => {
     let filteredData = [...sampleData];
 
@@ -120,7 +122,11 @@ function DataViewsWrapper() {
     return restView;
   }, [view, isGroupedView]);
 
-  // Infinite scroll handler
+  /* ============================================
+   * INFINITE SCROLL HANDLER
+   * Load more data when user scrolls to bottom
+   * Appends new pages to existing records
+   * ============================================ */
   const currentPage = view.page || 1;
   const hasMoreData = currentPage < data.totalPages;
   
@@ -161,10 +167,15 @@ function DataViewsWrapper() {
     infiniteScrollHandler,
   };
 
+  /* ============================================
+   * ACTIONS
+   * Define which actions are available for
+   * the data items in the DataViews component
+   * ============================================ */
   const actions = [
     {
       id: 'view',
-      label: 'View',
+      label: 'View details',
       isPrimary: true,
       callback: (items) => {
         if (items.length > 0) {
@@ -174,11 +185,12 @@ function DataViewsWrapper() {
       }
     },
     {
-      id: 'delete',
-      label: 'Delete',
-      isDestructive: true,
+      id: 'give-cuddles',
+      label: 'Give Cuddles',
       callback: (items) => {
-        alert(`Would delete ${items.length} item(s)`);
+        items.forEach(item => {
+          alert(`Cuddles are being provided to ${item.category}`);
+        });
       }
     }
   ];
@@ -205,8 +217,6 @@ function DataViewsWrapper() {
         fields={fields}
         view={activeView}
         onChangeView={setView}
-        selection={selection}
-        onChangeSelection={setSelection}
         actions={actions}
         paginationInfo={paginationInfo}
         getItemId={(item) => item.id}
@@ -228,7 +238,7 @@ function DataViewsWrapper() {
             setIsModalOpen(false);
             setSelectedItem(null);
           }}
-          size="large"
+          isFullScreen
         >
           <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', marginBottom: '1rem' }}>
