@@ -1,19 +1,25 @@
 // Field definitions for the Dataviews component
+
+// Category color mapping
+const categoryColors = {
+  charlie: { bg: '#e3f2fd', color: '#1565c0' },
+  edward: { bg: '#f3e5f5', color: '#7b1fa2' },
+  fred: { bg: '#e8f5e8', color: '#2e7d32' },
+  rosie: { bg: '#fff3e0', color: '#ef6c00' }
+};
+
+// Medium color mapping
+const mediumColors = {
+  digital: '#c2185b',
+  film: '#00695c'
+};
+
 export const fields = [
   {
     id: 'title',
     header: 'Title',
     type: 'text',
     getValue: ({ item }) => item.name,
-    render: ({ item }) => (
-      <span style={{
-        fontSize: '0.875rem',
-        fontWeight: '800',
-        color: '#374151'
-      }}>
-        {item.name}
-      </span>
-    ),
     filterBy: false,
     enableHiding: true,
     enableSorting: true
@@ -23,20 +29,13 @@ export const fields = [
     header: 'Image',
     type: 'media',
     getValue: ({ item }) => item.path,
-    render: ({ item }) => { 
-        return (
+    render: ({ item }) => (
       <img 
         src={item.path} 
         alt={item.name}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          borderRadius: '4px',
-          border: '1px solid #e0e0e0'
-        }}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
       />
-    )},
+    ),
     filterBy: false,
     enableSorting: false
   },
@@ -45,25 +44,14 @@ export const fields = [
     header: 'Cat',
     type: 'text',
     getValue: ({ item }) => item.category,
-    render: ({ item }) => (
-      <p style={{
-        padding: '4px 8px',
-        borderRadius: '4px',
-        backgroundColor: item.category === 'charlie' ? '#e3f2fd' : 
-                        item.category === 'edward' ? '#f3e5f5' : 
-                        item.category === 'fred' ? '#e8f5e8' : 
-                        item.category === 'rosie' ? '#fff3e0' : '#f5f5f5',
-        color: item.category === 'charlie' ? '#1565c0' : 
-               item.category === 'edward' ? '#7b1fa2' : 
-               item.category === 'fred' ? '#2e7d32' : 
-               item.category === 'rosie' ? '#ef6c00' : '#424242',
-        fontSize: '0.875rem',
-        fontWeight: '500',
-        textAlign: 'center'
-      }}>
-        {item.category}
-      </p>
-    ),
+    render: ({ item }) => {
+      const colors = categoryColors[item.category] || { bg: '#f5f5f5', color: '#424242' };
+      return (
+        <span className="category-badge" style={{ backgroundColor: colors.bg, color: colors.color }}>
+          {item.category}
+        </span>
+      );
+    },
     elements: [
       { value: 'charlie', label: 'charlie' },
       { value: 'edward', label: 'edward' },
@@ -78,19 +66,14 @@ export const fields = [
     header: 'Medium',
     type: 'text',
     getValue: ({ item }) => item.medium,
-    render: ({ item }) => (
-      <p style={{
-        padding: '4px 8px',
-        borderRadius: '4px',
-        border: item.medium === 'digital' ? '1px solid #c2185b' : '1px solid #00695c',
-        color: item.medium === 'digital' ? '#c2185b' : '#00695c',
-        fontSize: '0.875rem',
-        fontWeight: '500',
-        textAlign: 'center'
-      }}>
-        {item.medium}
-      </p>
-    ),
+    render: ({ item }) => {
+      const color = mediumColors[item.medium] || '#424242';
+      return (
+        <span className="medium-badge" style={{ borderColor: color, color }}>
+          {item.medium}
+        </span>
+      );
+    },
     elements: [
       { value: 'digital', label: 'Digital' },
       { value: 'film', label: 'Film' }

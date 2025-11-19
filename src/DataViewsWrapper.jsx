@@ -208,7 +208,7 @@ function DataViewsWrapper() {
         </Button>
       </div>
       <div>
-        <p style={{ margin: 0 }}>This is a demo of the WordPress DataViews component displaying a list of team members.</p>
+        <p style={{ margin: 0, fontWeight: '400' }}>This is a demo of the WordPress DataViews component displaying a list of team members.</p>
       </div>
       </header>
 
