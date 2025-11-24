@@ -11,6 +11,11 @@ function DataViewsWrapper() {
   const [allLoadedRecords, setAllLoadedRecords] = useState([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   
+    /* ============================================
+   * VIEW STATE
+   * Defines the current view settings
+   * ============================================ */
+
   const [view, setView] = useState({
     type: 'grid',
     perPage: 10,
@@ -128,7 +133,6 @@ function DataViewsWrapper() {
    * Appends new pages to existing records
    * ============================================ */
   const currentPage = view.page || 1;
-  const hasMoreData = currentPage < data.totalPages;
   
   const infiniteScrollHandler = useCallback(() => {
     if (isLoadingMore || currentPage >= data.totalPages) {
