@@ -8,8 +8,6 @@ function DataViewsWrapper() {
   const [isGroupedView, setIsGroupedView] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [allLoadedRecords, setAllLoadedRecords] = useState([]);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   
     /* ============================================
    * VIEW STATE
@@ -28,8 +26,7 @@ function DataViewsWrapper() {
     filters: [],
     titleField: 'name',
     mediaField: 'image',
-    fields: ['category'],
-    infiniteScrollEnabled: false
+    fields: ['category']
   });
 
   /* ============================================
@@ -127,48 +124,9 @@ function DataViewsWrapper() {
     return restView;
   }, [view, isGroupedView]);
 
-  /* ============================================
-   * INFINITE SCROLL HANDLER
-   * Load more data when user scrolls to bottom
-   * Appends new pages to existing records
-   * ============================================ */
-  const currentPage = view.page || 1;
-  
-  const infiniteScrollHandler = useCallback(() => {
-    if (isLoadingMore || currentPage >= data.totalPages) {
-      return;
-    }
-
-    setIsLoadingMore(true);
-    setView({
-      ...view,
-      page: currentPage + 1,
-    });
-
-  }, [isLoadingMore, currentPage, data.totalPages, view]);
-
-  // Initialize data on first load or when view changes significantly
-  useEffect(() => {
-    if ( currentPage === 1 || ! view.infiniteScrollEnabled ) {
-      // First page or pagination mode - use appropriate data
-      setAllLoadedRecords(data.data);
-    } else {
-      // Subsequent pages - append to existing data
-      setAllLoadedRecords((prev) => {
-        const existingIds = new Set(prev.map(item => item.id));
-        const newRecords = data.data.filter(
-          (record) => !existingIds.has(record.id)
-        );
-        return [...prev, ...newRecords];
-      });
-    }
-    setIsLoadingMore(false);
-  }, [view.search, view.filters, view.perPage, view.sort, currentPage, view.infiniteScrollEnabled, data.data]);
-
   const paginationInfo = {
     totalItems: data.totalItems,
-    totalPages: data.totalPages,
-    infiniteScrollHandler,
+    totalPages: data.totalPages
   };
 
   /* ============================================
@@ -217,14 +175,13 @@ function DataViewsWrapper() {
       </header>
 
       <DataViews
-        data={allLoadedRecords}
+        data={data.data}
         fields={fields}
         view={activeView}
         onChangeView={setView}
         actions={actions}
         paginationInfo={paginationInfo}
         getItemId={(item) => item.id}
-        isLoading={isLoadingMore}
         defaultLayouts={{
             grid: {
                 showMedia: true,
