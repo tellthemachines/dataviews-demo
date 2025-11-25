@@ -21,12 +21,12 @@ function DataViewsWrapper() {
     perPage: 10,
     page: 1,
     sort: {
-      field: 'title',
+      field: 'name',
       direction: 'asc'
     },
     search: '',
     filters: [],
-    titleField: 'title',
+    titleField: 'name',
     mediaField: 'image',
     fields: ['category'],
     infiniteScrollEnabled: false

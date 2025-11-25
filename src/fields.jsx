@@ -16,10 +16,9 @@ const mediumColors = {
 
 export const fields = [
   {
-    id: 'title',
-    header: 'Title',
+    id: 'name',
+    header: 'Name',
     type: 'text',
-    getValue: ({ item }) => item.name,
     filterBy: false,
     enableHiding: true,
     enableSorting: true
